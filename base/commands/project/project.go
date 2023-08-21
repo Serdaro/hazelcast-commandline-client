@@ -25,6 +25,13 @@ func (gc ProjectCommand) Exec(ctx context.Context, ec plug.ExecContext) error {
 	return nil
 }
 
+func (qc ProjectCommand) Augment(ec plug.ExecContext, props *plug.Properties) error {
+	//	props.Set(clc.PropertyFormat, base.PrinterTable)
+	return nil
+}
+
 func init() {
-	Must(plug.Registry.RegisterCommand("project", &ProjectCommand{}))
+	cmd := &ProjectCommand{}
+	Must(plug.Registry.RegisterCommand("project", cmd))
+	plug.Registry.RegisterAugmentor("20-project", cmd)
 }
